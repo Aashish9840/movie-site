@@ -45,7 +45,7 @@ export const Header = () => {
   ];
   return (
     <div
-      className="flex flex-col bg-white  sm:bg-black"
+      className="flex flex-col bg-white  md:bg-black"
       onClick={() => (setcountrymovie(false), setrecommend(false))}
     >
       <div className="relative flex justify-between items-center  bg-white py-3 md:py-5 md:px-7 mx-4">
@@ -58,36 +58,36 @@ export const Header = () => {
           </h1>
         </Link>
 
-        <div className="md:flex gap-[90px]">
-          <div className="hidden md:flex items-center gap-2">
+        <div className="md:flex gap-[20px] lg:gap-[60px] xl:gap-[90px]">
+          <div className="hidden lg:flex items-center gap-3">
             <button
-              className="text-[15px] font-semibold border rounded-full border-slate-300 px-7 py-2 hover:bg-green-400"
+              className="text-[15px] font-semibold border rounded-full border-slate-300 px-5 py-2 hover:bg-green-400 transition duration-1000 ease-in-out hover:scale-90 xl:px-7"
               onMouseEnter={() => (setrecommend(true), setcountrymovie(false))}
             >
               Genre
             </button>
             <button
-              className="text-[15px] font-semibold border rounded-full border-slate-300 px-7 py-2 hover:bg-green-400"
+              className="text-[15px] font-semibold border rounded-full border-slate-300 px-5 py-2 hover:bg-green-400 transition duration-1000 ease-in-out hover:scale-90 xl:px-7"
               onMouseEnter={() => (setcountrymovie(true), setrecommend(false))}
             >
               Country
             </button>
             <Link
               href="/recent"
-              className=" text-[15px] font-semibold border rounded-full border-slate-300 px-7 py-2 hover:bg-green-400"
+              className=" text-[15px] font-semibold border rounded-full border-slate-300 px-5 py-2 hover:bg-green-400 transition duration-1000 ease-in-out hover:scale-90 xl:px-7"
             >
               Recent Movie
             </Link>
             <Link
               href="/highrated"
-              className=" text-[15px] font-semibold border rounded-full border-slate-300 px-7 py-2 hover:bg-green-400"
+              className=" text-[15px] font-semibold border rounded-full border-slate-300 px-5 py-2 hover:bg-green-400 transition duration-1000 ease-in-out hover:scale-90 xl:px-7"
             >
-              Highrest Rating
+              Top Rating
             </Link>
           </div>
 
-          <div className="hidden sm:flex gap-2 items-center">
-            <div className="flex px-3 py-[6px] border border-slate-400 outline-none cursor-pointer">
+          <div className="hidden md:flex gap-2 items-center">
+            <div className="flex px-5 py-[6px] border border-slate-400 outline-none cursor-pointer">
               <Search />
               <input
                 type="text"
@@ -95,12 +95,12 @@ export const Header = () => {
                 placeholder="Search latest movie"
               />
             </div>
-            <button className=" text-[15px] font-semibold border rounded-full px-7 py-2 border-slate-400 hover:bg-green-400">
+            <button className=" text-[15px] font-semibold border rounded-full px-5 py-2 border-slate-400 hover:bg-green-400 transition duration-1000 ease-in-out hover:scale-90 xl:px-7">
               SignUP
             </button>
           </div>
-          <div className="flex items-center gap-6 sm:hidden">
-            <Search onClick={() => setSearchbotton((current)=>!current)} />
+          <div className="flex items-center gap-6 lg:hidden">
+            <Search onClick={() => setSearchbotton((current) => !current)} className="md:hidden" />
             <Menu
               size={27}
               onClick={() => (
@@ -134,7 +134,7 @@ export const Header = () => {
       </div>
       <hr className="mx-4" />
       {menuState && (
-        <div className="absolute flex flex-col text-white bg-black top-0 right-0 gap-10 h-[100vh] w-[90vw] z-10 px-5 py-5 transition-[h] duration-1000 ease-in-out">
+        <div className="absolute flex flex-col text-white bg-black top-0 right-0 gap-10 h-screen w-[90vw] z-10 px-5 py-5 transition duration-1000 ease-in-out active:min-h-screen">
           <div
             className="flex gap-1 justify-start items-center cursor-pointer"
             onClick={() => setMenuState(false)}
@@ -192,7 +192,6 @@ export const Header = () => {
               )}
             </div>
 
-
             {displaycountry && (
               <div className="relative h-fit z-10 rounded-sm grid grid-cols-2 gap-y-4  gap-x-[80px] w-fit ">
                 {country.map((item, index) => (
@@ -227,17 +226,16 @@ export const Header = () => {
             Highrest Rating
           </Link>
         </div>
-        
       )}
       {searchbotton && (
-              <div className="relative top-full flex px-3 py-[6px] border rounded-lg my-3 w-[80vw] mx-auto bg-white border-black outline-none cursor-pointer">
-                <input
-                  type="text"
-                  className="ml-2 outline-none border-none bg-transparent flex-1"
-                  placeholder="Search"
-                />
-              </div>
-            )}
+        <div className="relative top-full flex px-5 py-[6px] border rounded-lg my-3 w-[80vw] mx-auto bg-white border-black outline-none cursor-pointer">
+          <input
+            type="text"
+            className="ml-2 outline-none border-none bg-transparent flex-1"
+            placeholder="Search"
+          />
+        </div>
+      )}
     </div>
   );
 };

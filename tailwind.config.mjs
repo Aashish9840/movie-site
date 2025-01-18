@@ -17,6 +17,11 @@ export default {
           to: { transform: "translateX(-100%)" },
         },
       },
+        transitionProperty: {
+          'height': '90vh',
+          'width': 'width'
+        }
+  
     },
   },
   plugins: [require("tailwindcss-animate")],
