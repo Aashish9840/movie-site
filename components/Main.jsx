@@ -31,9 +31,9 @@ export const Main = ({ movies }) => {
     return `${monthMapper[newDate.getMonth()]} ${newDate.getDay()}`;
   }
   return (
-    <div className="flex flex-col min-h-screen box-border bg-black px-4">
+    <div className="flex flex-col min-h-screen w-screen px-0 md:bg-black md:px-4">
       <div
-        className="h-[90vh] bg-cover  rounded-b-lg"
+        className="h-[90vh] bg-cover rounded-b-lg w-full"
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/original${HomeSlide?.backdrop_path}})`,
         }}
@@ -51,10 +51,10 @@ export const Main = ({ movies }) => {
               : HomeSlide?.overview}
           </p>
           <div className="flex item-center mt-6">
-            <button className="bg-yellow-400 py-[6px] px-3 lg:px-5 rounded-full text-black text-sm font-extrabold mr-4">
+            <button className="bg-yellow-400 py-[6px] px-3 text-sm lg:px-5 rounded-full text-black font-extrabold mr-4 text-[14px]">
               IMBD: {HomeSlide?.vote_average?.toFixed(1)}
             </button>
-            <button className="bg-white py-[6px] px-5 rounded-full text-black font-extrabold">
+            <button className="bg-white py-[6px] text-sm px-5 rounded-full text-black font-extrabold sm:text-[14px]">
               Released On:{" "}
               {HomeSlide ? formatDate(HomeSlide?.release_date) : ""}
             </button>

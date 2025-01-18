@@ -23,7 +23,7 @@ export const Search = ({ movies, setHomeSlide }) => {
   return (
     <div className="relative flex justify-center items-center p-3 rounded-full backdrop-blur-md border-[2px] border-white outline-none w-full lg:w-1/4">
       <div className="text-white cursor-pointer">
-        <CiSearch className="h-6 w-6" />
+        <CiSearch className="h-6 w-6 ml-7" />
       </div>
       <input
         type="text"

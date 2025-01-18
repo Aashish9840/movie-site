@@ -2,8 +2,8 @@ import React from "react";
 
 export const Footer = () => {
   return (
-    <div className="bg-black">
-      <div className="mx-4 bg-white flex flex-col gap-10 px-10 py-10">
+    <div className="md:bg-black">
+      <div className=" bg-white flex flex-col gap-10 px-10 py-10 md:mx-4" >
         <div className="flex justify-between item-center">
           <div className="flex flex-col">
             <h1 className="text-xl font-semibold">Movie Search </h1>

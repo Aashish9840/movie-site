@@ -3,8 +3,8 @@ import React from "react";
 
 export const UpcomingMovies = ({ movies, setHomeSlide }) => {
   return (
-    <div className="flex flex-col mt-3">
-      <h1 className="text-[25px] font-extrabold  bg-black text-white">
+    <div className="flex flex-col mt-3 ml-4">
+      <h1 className="text-[25px] font-extrabold text-black">
         Upcoming Movies
       </h1>
       <div className="w-full flex relative overflow-hidden">
@@ -27,6 +27,7 @@ export const UpcomingMovies = ({ movies, setHomeSlide }) => {
           ))}
         </div>
       </div>
+      <hr />
     </div>
   );
 };
