@@ -1,7 +1,10 @@
 "use client";
+import FetchSearch from "@/app/hooks/FetchSearch";
 import { Menu, Minus, Plus, Search, SquarePlus, X } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import InputfilterSearch from "./InputfilterSearch";
+import { DisplayContext } from "@/app/layout";
 
 export const Header = () => {
   const [countrymovie, setcountrymovie] = useState(false);
@@ -10,7 +13,30 @@ export const Header = () => {
   const [displaymovie, setDisplaymovie] = useState(false);
   const [displaycountry, setDisplaycountry] = useState(false);
   const [searchbotton, setSearchbotton] = useState(false);
-  console.log(menuState);
+  const [filtersearch, setfiltersearch] = useState();
+  const {HomeSlide, setHomeSlide}=useContext(DisplayContext)
+  const {getinput, setGetinput}=useContext(DisplayContext)
+  const { moviefetch, collectinput } = FetchSearch();
+  useEffect(() => {
+    moviefetch();
+  }, [getinput]);
+  
+
+  const handlefilter = (e) => {
+    setGetinput(e.target.value);
+    
+    if (e.target.value===''){
+      setfiltersearch([])
+    }
+    else{
+      const movie = collectinput.filter((element) => {
+        return element.original_title.toLowerCase().includes(e.target.value.toLowerCase());
+      });
+      setfiltersearch(movie);
+    }
+  };
+
+
   const genre = [
     "Romantic",
     "Horror",
@@ -87,20 +113,29 @@ export const Header = () => {
           </div>
 
           <div className="hidden md:flex gap-2 items-center">
-            <div className="flex px-5 py-[6px] border border-slate-400 outline-none cursor-pointer">
+            <div className="relative flex px-5 py-[6px] border border-slate-400 outline-none cursor-pointer">
               <Search />
               <input
                 type="text"
                 className="ml-2 outline-none border-none flex-1"
                 placeholder="Search latest movie"
+                value={getinput}
+                onChange={(e) => handlefilter(e)}
               />
             </div>
+            {filtersearch && (
+                    <InputfilterSearch filtersearch={filtersearch}/>
+                  )}
+
             <button className=" text-[15px] font-semibold border rounded-full px-5 py-2 border-slate-400 hover:bg-green-400 transition duration-1000 ease-in-out hover:scale-90 xl:px-7">
               SignUP
             </button>
           </div>
           <div className="flex items-center gap-6 lg:hidden">
-            <Search onClick={() => setSearchbotton((current) => !current)} className="md:hidden" />
+            <Search
+              onClick={() => setSearchbotton((current) => !current)}
+              className="md:hidden"
+            />
             <Menu
               size={27}
               onClick={() => (
@@ -228,14 +263,24 @@ export const Header = () => {
         </div>
       )}
       {searchbotton && (
-        <div className="relative top-full flex px-5 py-[6px] border rounded-lg my-3 w-[80vw] mx-auto bg-white border-black outline-none cursor-pointer">
-          <input
+        <div className="relative top-full flex px-2 py-[6px] border rounded-lg my-3 w-[80vw] mx-auto bg-white border-slate-300 outline-none cursor-pointer sm:w-[30vw]">
+         
+         <div>
+         <input
             type="text"
             className="ml-2 outline-none border-none bg-transparent flex-1"
             placeholder="Search"
+            value={getinput}
+            onChange={(e) => (handlefilter(e))}
           />
+          </div> 
+           {filtersearch &&
+                    <InputfilterSearch filtersearch={filtersearch}/>
+                  }
         </div>
+       
       )}
+      
     </div>
   );
 };

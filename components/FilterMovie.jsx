@@ -9,7 +9,7 @@ const FilterMovie = ({movie}) => {
     width={220}
     height={200}
     alt='title'
-    className='w-auto h-auto'
+    className='w-auto h-auto cursor-pointer'
     />
     <p className='font-medium text-[15px]'>{movie?.title}</p>
 </div>

@@ -8,7 +8,6 @@ const page = async () => {
     
       const allmovie=receive.concat(popular)
       const highrated=allmovie.filter((movie)=>(movie.vote_average>=7))
-      console.log(highrated)
   return (
     <div className='md:bg-black'>
 

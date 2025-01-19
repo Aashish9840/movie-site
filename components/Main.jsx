@@ -1,10 +1,11 @@
 "use client";
 
+import { DisplayContext } from "@/app/layout";
 import { Search } from "./Search";
 import { UpcomingMovies } from "./UpcomingMovies";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 export const Main = ({ movies }) => {
-  const [HomeSlide, setHomeSlide] = useState({});
+  const {HomeSlide, setHomeSlide}=useContext(DisplayContext)
 
   useEffect(() => {
     const curMovie = movies[Math.floor(Math.random() * 10)];
@@ -39,7 +40,7 @@ export const Main = ({ movies }) => {
         }}
       >
         <div className="flex px-9 pt-4 justify-center item-center">
-          <Search movies={movies} setHomeSlide={setHomeSlide} />
+          {/* <Search movies={movies} setHomeSlide={setHomeSlide} /> */}
         </div>
         <div className=" px-8 flex flex-col justify-center h-full w-full lg:w-[50%]">
           <h1 className="text-white text-2xl lg:text-5xl font-extrabold mb-3">
