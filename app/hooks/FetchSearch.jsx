@@ -14,7 +14,7 @@ const FetchSearch = () => {
               },
             }; 
       const alldata=[]
-            for (let page = 1; page <= 35; page++) {
+            for (let page =60 ; page <= 65; page++) {
               const response = await fetch(
                 `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`,
                 options

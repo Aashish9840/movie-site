@@ -23,13 +23,14 @@ export default function RootLayout({ children }) {
   // Define shared state
   const [HomeSlide, setHomeSlide] = useState({});
   const [getinput, setGetinput] = useState("");
+  const [filtersearch, setfiltersearch] = useState();
 
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <DisplayContext.Provider value={{ HomeSlide, setHomeSlide, getinput, setGetinput}}>
+        <DisplayContext.Provider value={{ HomeSlide, setHomeSlide, getinput, setGetinput, filtersearch, setfiltersearch}}>
           <Header />
           {children}
           <Footer />

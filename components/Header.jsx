@@ -13,9 +13,8 @@ export const Header = () => {
   const [displaymovie, setDisplaymovie] = useState(false);
   const [displaycountry, setDisplaycountry] = useState(false);
   const [searchbotton, setSearchbotton] = useState(false);
-  const [filtersearch, setfiltersearch] = useState();
-  const {HomeSlide, setHomeSlide}=useContext(DisplayContext)
   const {getinput, setGetinput}=useContext(DisplayContext)
+  const {filtersearch, setfiltersearch}=useContext(DisplayContext)
   const { moviefetch, collectinput } = FetchSearch();
   useEffect(() => {
     moviefetch();
@@ -35,6 +34,7 @@ export const Header = () => {
       setfiltersearch(movie);
     }
   };
+  console.log(filtersearch)
 
 
   const genre = [
