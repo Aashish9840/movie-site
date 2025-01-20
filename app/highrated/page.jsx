@@ -14,12 +14,13 @@ const page =  () => {
   });
   
       const highrated=collectinput.filter((movie)=>(movie.vote_average>=7.5))
-      const {HomeSlide}=useContext(DisplayContext)
+      const {catagorydisplay}=useContext(DisplayContext)
+      console.log(catagorydisplay)
   return (
     <div className='relative md:bg-black'>
       {
-HomeSlide &&
-<MainDisplay />
+Object.keys(catagorydisplay).length === 0 ? <></>:
+<MainDisplay/>
       }
       
 
@@ -28,7 +29,7 @@ HomeSlide &&
         <div className='grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
             {
                 highrated.map((movie)=>(
-                   <FilterMovie movie={movie} key={movie.id}
+                   <FilterMovie movie={movie}
                     />
 
                 ))

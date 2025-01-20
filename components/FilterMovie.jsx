@@ -2,11 +2,14 @@
 import { DisplayContext } from '@/app/layout'
 import Image from 'next/image'
 import React, { useContext } from 'react'
+import { v4 as uuidv4 } from 'uuid';
+
 
 const FilterMovie = ({movie, index}) => {
-  const {setHomeSlide}=useContext(DisplayContext)
+  // const id=uuidv4()
+  const {setCategorydisplay}=useContext(DisplayContext)
   return (
-    <div key={movie.id} onClick={()=>(setHomeSlide(movie), console.log('clicked'))}>
+    <div key={index} onClick={()=>(setCategorydisplay(movie))}>
     <Image
     src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
     width={220}

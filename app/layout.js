@@ -21,7 +21,8 @@ const geistMono = Geist_Mono({
 
 export default function RootLayout({ children }) {
   // Define shared state
-  const [HomeSlide, setHomeSlide] = useState({});
+  const [HomeSlide, setHomeSlide] = useState({}); // this is used for the home page to filter the inputfiletered search movie
+  const [catagorydisplay, setCategorydisplay] = useState({}); // this is state to managed the inputfiltersearch movie for different catogory and state
   const [getinput, setGetinput] = useState("");
   const [filtersearch, setfiltersearch] = useState();
 
@@ -30,7 +31,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <DisplayContext.Provider value={{ HomeSlide, setHomeSlide, getinput, setGetinput, filtersearch, setfiltersearch}}>
+        <DisplayContext.Provider value={{ HomeSlide, setHomeSlide, getinput, setGetinput, filtersearch, setfiltersearch, catagorydisplay, setCategorydisplay}}>
           <Header />
           {children}
           <Footer />
