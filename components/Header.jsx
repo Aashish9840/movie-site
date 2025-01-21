@@ -169,7 +169,9 @@ export const Header = () => {
       </div>
       <hr className="mx-4" />
       {menuState && (
-        <div className="absolute flex flex-col text-white bg-black top-0 right-0 gap-10 h-screen w-[90vw] z-10 px-5 py-5 transition duration-1000 ease-in-out active:min-h-screen">
+        <div className={`absolute flex flex-col text-white bg-black top-0 right-0 gap-10 h-screen
+          ${menuState ? 'w-[90vw]' : 'w-0'} 
+          z-10 px-5 py-5 overflow-hidden transition-width duration-menu ease-in-linear`}>
           <div
             className="flex gap-1 justify-start items-center cursor-pointer"
             onClick={() => setMenuState(false)}

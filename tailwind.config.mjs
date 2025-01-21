@@ -17,10 +17,17 @@ export default {
           to: { transform: "translateX(-100%)" },
         },
       },
-        transitionProperty: {
-          'height': '90vh',
-          'width': 'width'
-        }
+      transitionProperty: {
+        height: 'height',
+        width: 'width',
+        transform:'transform',
+      },
+      transitionDuration: {
+        'menu': '5s', // Equivalent to 2s
+      },
+      transitionTimingFunction: {
+        'ease-in-linear': 'cubic-bezier(0.4, 0, 1, 1)', // Custom easing
+      },
   
     },
   },
