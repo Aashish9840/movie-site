@@ -17,7 +17,7 @@ export const Footer = () => {
             <p className="text-[14px] font-normal">Leading Site</p>
             <p className="text-[14px] font-normal">All movie available</p>
           </div>
-          <div className="flex flex-col">
+          <div className="hidden md:flex flex-col ">
             <h1 className="text-xl font-semibold">Good movie site</h1>
             <p className="text-[14px] font-normal">More about us</p>
             <p className="text-[14px] font-normal">
@@ -35,7 +35,7 @@ export const Footer = () => {
             <p className="text-[14px] font-normal">Find movie</p>
             <p className="text-[14px] font-normal">new release</p>
           </div>
-          <div className="flex flex-col">
+          <div className="hidden sm:flex flex-col">
             <h1 className="text-xl font-semibold">Feedback Us </h1>
             <p className="text-[14px] font-normal">
               Known for the faster client services
@@ -44,7 +44,7 @@ export const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col gap-3">
-          <h1 className="text-2xl font-semibold">Follow</h1>
+          <h1 className="text-2xl font-semibold">Follow Us</h1>
           <div className="flex item-center gap-4">
             <Link href="https://www.facebook.com/aashishbabu.shah">
               <svg

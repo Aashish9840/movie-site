@@ -15,7 +15,6 @@ const page =  () => {
   
       const highrated=collectinput.filter((movie)=>(movie.vote_average>=7.5))
       const {catagorydisplay}=useContext(DisplayContext)
-      console.log(catagorydisplay)
   return (
     <div className='relative md:bg-black'>
       {
