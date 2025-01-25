@@ -11,7 +11,6 @@ export const Main = ({ movies }) => {
     const curMovie = movies[Math.floor(Math.random() * 10)];
     setHomeSlide(curMovie);
   }, []);
-
   const monthMapper = {
     1: "Jan",
     2: "Feb",
