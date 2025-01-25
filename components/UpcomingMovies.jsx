@@ -9,7 +9,7 @@ export const UpcomingMovies = ({ movies, setHomeSlide }) => {
       </h1>
       <div className="w-full flex relative overflow-hidden">
         <div className="flex my-4 animate-auto-slide hover:paused gap-x-5 w-max">
-          {movies.map((movie) => (
+          {movies?.map((movie) => (
             <div
               className="h-[230px] w-[150px] mr-3 cursor-pointer"
               key={movie?.title}
