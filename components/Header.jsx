@@ -169,10 +169,12 @@ export const Header = () => {
         )}
       </div>
       <hr className="mx-4" />
-      {/* to show the menu items based on menuState */}
+      {menuState && (
         <div
-          className={`absolute flex flex-col text-white bg-black top-0 right-0 gap-10 w-[90%]
-          z-10 px-5 py-5 transition-all duration-500 ease-in-linear ${menuState ? "h-screen  opacity-100":"h-0  opacity-0"}`}
+          className={`absolute flex flex-col text-white bg-black top-0 right-0 gap-10  ${
+            menuState ? "h-screen w-[80%]" : "h-0 w-0"
+          }
+          z-10 px-5 py-5 transition duration-1000 ease-in-linear`}
         >
           <div
             className="flex gap-1 justify-between items-center cursor-pointer"
@@ -279,7 +281,8 @@ export const Header = () => {
             Highrest Rating
           </Link>
         </div>
-     
+      )}
+
       
       {searchbotton && (
         <div className="relative top-full flex px-2 py-[6px] border rounded-lg my-3 w-[80vw] mx-auto bg-white border-slate-300 outline-none cursor-pointer sm:w-[30vw]">
