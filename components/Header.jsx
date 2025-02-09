@@ -1,6 +1,16 @@
 "use client";
 import FetchSearch from "@/app/hooks/FetchSearch";
-import { Menu, Minus, Plus, Search, SquarePlus, X } from "lucide-react";
+import {
+  CircleMinus,
+  CirclePlus,
+  CircleX,
+  Menu,
+  Minus,
+  Plus,
+  Search,
+  SquarePlus,
+  X,
+} from "lucide-react";
 import Link from "next/link";
 import { useContext, useEffect, useRef, useState } from "react";
 import InputfilterSearch from "./InputfilterSearch";
@@ -13,29 +23,27 @@ export const Header = () => {
   const [displaymovie, setDisplaymovie] = useState(false);
   const [displaycountry, setDisplaycountry] = useState(false);
   const [searchbotton, setSearchbotton] = useState(false);
-  const {getinput, setGetinput}=useContext(DisplayContext)
-  const {filtersearch, setfiltersearch}=useContext(DisplayContext)
+  const { getinput, setGetinput } = useContext(DisplayContext);
+  const { filtersearch, setfiltersearch } = useContext(DisplayContext);
   const { moviefetch, collectinput } = FetchSearch();
   useEffect(() => {
     moviefetch();
   }, [getinput]);
-  
 
   const handlefilter = (e) => {
     setGetinput(e.target.value);
-    
-    if (e.target.value===''){
-      setfiltersearch([])
-    }
-    else{
+
+    if (e.target.value === "") {
+      setfiltersearch([]);
+    } else {
       const movie = collectinput.filter((element) => {
-        return element.original_title.toLowerCase().includes(e.target.value.toLowerCase());
+        return element.original_title
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase());
       });
       setfiltersearch(movie);
     }
   };
-  console.log(filtersearch)
-
 
   const genre = [
     "Romantic",
@@ -123,9 +131,7 @@ export const Header = () => {
                 onChange={(e) => handlefilter(e)}
               />
             </div>
-            {filtersearch && (
-                    <InputfilterSearch filtersearch={filtersearch}/>
-                  )}
+            {filtersearch && <InputfilterSearch filtersearch={filtersearch} />}
 
             <button className=" text-[15px] font-semibold border rounded-full px-5 py-2 border-slate-400 hover:bg-green-400 transition duration-1000 ease-in-out hover:scale-90 xl:px-7">
               SignUP
@@ -136,12 +142,7 @@ export const Header = () => {
               onClick={() => setSearchbotton((current) => !current)}
               className="md:hidden"
             />
-            <Menu
-              size={27}
-              onClick={() => (
-                console.log("clicked button"), setMenuState((pre) => !pre)
-              )}
-            />
+            <Menu size={27} onClick={() => setMenuState((pre) => !pre)} />
           </div>
         </div>
         {recommend && (
@@ -168,15 +169,16 @@ export const Header = () => {
         )}
       </div>
       <hr className="mx-4" />
-      {menuState && (
-        <div className={`absolute flex flex-col text-white bg-black top-0 right-0 gap-10 h-screen
-          ${menuState ? 'w-[90vw]' : 'w-0'} 
-          z-10 px-5 py-5 overflow-hidden transition-width duration-menu ease-in-linear`}>
+      {/* to show the menu items based on menuState */}
+        <div
+          className={`absolute flex flex-col text-white bg-black top-0 right-0 gap-10 w-[90%]
+          z-10 px-5 py-5 transition-all duration-500 ease-in-linear ${menuState ? "h-screen  opacity-100":"h-0  opacity-0"}`}
+        >
           <div
-            className="flex gap-1 justify-start items-center cursor-pointer"
+            className="flex gap-1 justify-between items-center cursor-pointer"
             onClick={() => setMenuState(false)}
           >
-            <X size={25} />
+            <CircleX size={23} className="text-red-500" />
             <button className="text-xl font-semibold">Close</button>
           </div>
 
@@ -184,19 +186,27 @@ export const Header = () => {
             <div className="flex justify-between items-center">
               Genre
               {!displaymovie ? (
-                <Plus
-                  size={22}
+                <CirclePlus
                   onClick={() => (
                     setDisplaymovie(true), setDisplaycountry(false)
                   )}
+                  size={20}
+                  className="text-blue-400 cursor-pointer"
                 />
               ) : (
-                <Minus size={22} onClick={() => setDisplaymovie(false)} />
+                <CircleMinus
+                  size={20}
+                  onClick={() => setDisplaymovie(false)}
+                  className="text-blue-400 cursor-pointer"
+                />
               )}
             </div>
 
-            {displaymovie && (
-              <div className="relative h-fit z-10 rounded-sm grid grid-cols-2 gap-y-4  gap-x-[80px] w-fit">
+           
+            <div
+              className={`relative h-fit z-10 rounded-sm grid grid-cols-2 gap-y-4 gap-x-[80px] overflow-hidden transition-all duration-1000 ease-in-out 
+              ${displaymovie ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"}`}
+            >
                 {genre.map((item, index) => (
                   <Link
                     key={index}
@@ -211,41 +221,47 @@ export const Header = () => {
                   </Link>
                 ))}
               </div>
-            )}
+            
           </div>
 
           <div className="relative flex flex-col gap-3">
             <div className="flex justify-between items-center">
               Country
               {!displaycountry ? (
-                <Plus
-                  size={22}
+                <CirclePlus
                   onClick={() => (
-                    setDisplaycountry(true), setDisplaymovie(false)
+                    setDisplaymovie(false), setDisplaycountry(true)
                   )}
+                  size={20}
+                  className="text-blue-400 cursor-pointer"
                 />
               ) : (
-                <Minus size={22} onClick={() => setDisplaycountry(false)} />
+                <CircleMinus
+                  size={20}
+                  onClick={() => setDisplaycountry(false)}
+                  className="text-blue-400 cursor-pointerr"
+                />
               )}
             </div>
 
-            {displaycountry && (
-              <div className="relative h-fit z-10 rounded-sm grid grid-cols-2 gap-y-4  gap-x-[80px] w-fit ">
-                {country.map((item, index) => (
-                  <Link
-                    key={index}
-                    href="/country"
-                    onClick={() => (
-                      setMenuState(false), setDisplaycountry(false)
-                    )}
-                  >
-                    <h1 className="font-bold py-1 text-[12px] text-slate-400 hover:bg-blue-500 px-2  hover:text-white">
-                      {item}
-                    </h1>
-                  </Link>
-                ))}
-              </div>
-            )}
+            <div
+              className={`relative h-fit z-10 rounded-sm grid grid-cols-2 gap-y-4 gap-x-[80px] overflow-hidden transition-all duration-1000 ease-in-out 
+              ${displaycountry ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"}`}
+            >
+              {country.map((item, index) => (
+                <Link
+                  key={index}
+                  href="/country"
+                  onClick={() => (
+                    setMenuState(false), setDisplaycountry(false)
+                  )}
+                >
+                  <h1 className="font-bold py-1 text-[12px] text-slate-400 hover:bg-blue-500 px-2  hover:text-white">
+                    {item}
+                  </h1>
+                </Link>
+              ))}
+            </div>
           </div>
 
           <Link
@@ -263,26 +279,22 @@ export const Header = () => {
             Highrest Rating
           </Link>
         </div>
-      )}
+     
+      
       {searchbotton && (
         <div className="relative top-full flex px-2 py-[6px] border rounded-lg my-3 w-[80vw] mx-auto bg-white border-slate-300 outline-none cursor-pointer sm:w-[30vw]">
-         
-         <div>
-         <input
-            type="text"
-            className="ml-2 outline-none border-none bg-transparent flex-1"
-            placeholder="Search"
-            value={getinput}
-            onChange={(e) => (handlefilter(e))}
-          />
-          </div> 
-           {filtersearch &&
-                    <InputfilterSearch filtersearch={filtersearch}/>
-                  }
+          <div>
+            <input
+              type="text"
+              className="ml-2 outline-none border-none bg-transparent flex-1"
+              placeholder="Search"
+              value={getinput}
+              onChange={(e) => handlefilter(e)}
+            />
+          </div>
+          {filtersearch && <InputfilterSearch filtersearch={filtersearch} />}
         </div>
-       
       )}
-      
     </div>
   );
 };
