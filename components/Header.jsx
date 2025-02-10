@@ -166,7 +166,7 @@ export const Header = () => {
         {recommend && (
           <div className="absolute top-full left-[30vw] h-fit bg-yellow-50 z-10 rounded-sm grid grid-cols-4 gap-2 px-1 py-3 w-fit" ref={sideclick}>
             {genre.map((item, index) => (
-              <Link key={index} href="/genre" >
+              <Link key={index} href="/genre" onClick={()=>setrecommend(false)}>
                 <h1 className=" px-6 font-medium py-1 text-[14px] hover:bg-blue-500  hover:text-white">
                   {item}
                 </h1>
@@ -178,7 +178,7 @@ export const Header = () => {
         {countrymovie && (
           <div className="absolute top-full left-[35vw] h-fit bg-yellow-50 z-10 rounded-sm grid grid-cols-4 gap-2 px-1 py-3 w-fit" ref={sideclick}>
             {country.map((item, index) => (
-              <Link key={index} href="/country">
+              <Link key={index} href="/country" onClick={()=>setcountrymovie(false)}>
                 <h1 className=" px-6 font-medium py-1 text-[14px] hover:bg-blue-500  hover:text-white">
                   {item}
                 </h1>
