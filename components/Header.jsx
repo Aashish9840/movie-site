@@ -28,19 +28,19 @@ export const Header = () => {
 
   useEffect(() => {
     const handleSideClick = (e) => {
-      console.log(sideclick.current);
       if (!sideclick.current?.contains(e.target)) {
         setMenuState(false);
+        setrecommend(false);
+        setcountrymovie(false);
       }
     };
-    if (menuState) {
       document.addEventListener("mousedown", handleSideClick);
-    }
+    
 
     return () => {
-      document.removeEventListener("click", handleSideClick);
+      document.removeEventListener("mousedown", handleSideClick);
     };
-  }, [menuState]);
+  }, [menuState, recommend, countrymovie]);
 
   useEffect(() => {
     moviefetch();
@@ -59,11 +59,6 @@ export const Header = () => {
       });
       setfiltersearch(movie);
     }
-  };
-
-  const handleGenreHover = () => {
-    setrecommend(true);
-    setcountrymovie(false);
   };
 
   const genre = [
@@ -101,7 +96,6 @@ export const Header = () => {
   return (
     <div
       className="flex flex-col bg-white box-border md:bg-black"
-      onClick={() => (setcountrymovie(false), setrecommend(false))}
     >
       <div className="relative flex justify-between items-center  bg-white py-3 md:py-5 md:px-7 mx-4">
         <Link href="/">
@@ -117,15 +111,15 @@ export const Header = () => {
           <div className="hidden lg:flex items-center gap-3">
             <button
               className="text-[15px] font-semibold border rounded-full border-slate-300 px-5 py-2 hover:bg-green-400 transition duration-1000 ease-in-out hover:scale-90 xl:px-7"
-              onMouseEnter={handleGenreHover}
-              onMouseLeave={() => setDisplaymovie(false)}
+              onMouseEnter={()=>( setrecommend(true),setcountrymovie(false))} 
+              
             >
               Genre
             </button>
             <button
               className="text-[15px] font-semibold border rounded-full border-slate-300 px-5 py-2 hover:bg-green-400 transition duration-1000 ease-in-out hover:scale-90 xl:px-7"
-              onMouseEnter={() => (setcountrymovie(true), setrecommend(false))}
-              onMouseLeave={() => setcountrymovie(false)}
+              onMouseEnter={() => (setcountrymovie(true), setrecommend(false))} 
+             
             >
               Country
             </button>
@@ -170,9 +164,9 @@ export const Header = () => {
         </div>
 
         {recommend && (
-          <div className="absolute top-full left-[20vw] h-fit bg-yellow-50 z-10 rounded-sm grid grid-cols-4 gap-2 px-1 py-3 w-fit">
+          <div className="absolute top-full left-[30vw] h-fit bg-yellow-50 z-10 rounded-sm grid grid-cols-4 gap-2 px-1 py-3 w-fit" ref={sideclick}>
             {genre.map((item, index) => (
-              <Link key={index} href="/genre">
+              <Link key={index} href="/genre" >
                 <h1 className=" px-6 font-medium py-1 text-[14px] hover:bg-blue-500  hover:text-white">
                   {item}
                 </h1>
@@ -182,7 +176,7 @@ export const Header = () => {
         )}
 
         {countrymovie && (
-          <div className="absolute top-full left-[25vw] h-fit bg-yellow-50 z-10 rounded-sm grid grid-cols-4 gap-2 px-1 py-3 w-fit">
+          <div className="absolute top-full left-[35vw] h-fit bg-yellow-50 z-10 rounded-sm grid grid-cols-4 gap-2 px-1 py-3 w-fit" ref={sideclick}>
             {country.map((item, index) => (
               <Link key={index} href="/country">
                 <h1 className=" px-6 font-medium py-1 text-[14px] hover:bg-blue-500  hover:text-white">
