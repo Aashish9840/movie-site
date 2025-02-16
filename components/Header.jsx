@@ -188,10 +188,10 @@ export const Header = () => {
         )}
       </div>
 
-      {menuState && (
+     
         <div
-          className={`absolute flex flex-col text-white bg-black top-0 right-0 gap-10 h-screen w-[90%]
-          z-10 px-5 py-5 transition duration-1000 ease-in-linear`}
+          className={`fixed flex flex-col text-white bg-black top-0 right-0 gap-10 z-10 h-screen w-[90%] 
+         px-5 py-5 transition-transform duration-1000 ease-in-out ${menuState ? "  translate-x-0  ": "  translate-x-full "}`}
           ref={sideclick}
         >
           <div
@@ -223,7 +223,7 @@ export const Header = () => {
             </div>
 
             <div
-              className={`relative h-fit z-10 rounded-sm grid grid-cols-2 gap-y-4 gap-x-[80px] overflow-hidden transition-all duration-1000 ease-in-out 
+              className={`relative z-10 rounded-sm grid grid-cols-2 gap-y-4 gap-x-[80px] overflow-hidden transition-all duration-1000 ease-in-out 
               ${
                 displaymovie ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
               }`}
@@ -263,7 +263,7 @@ export const Header = () => {
             </div>
 
             <div
-              className={`relative h-fit z-10 rounded-sm grid grid-cols-2 gap-y-4 gap-x-[80px] overflow-hidden transition-all duration-1000 ease-in-out 
+              className={`relative z-10 rounded-sm grid grid-cols-2 gap-y-4 gap-x-[80px] overflow-hidden transition-all duration-1000 ease-in-out 
               ${
                 displaycountry
                   ? "opacity-100 max-h-[500px]"
@@ -301,7 +301,7 @@ export const Header = () => {
             Highrest Rating
           </Link>
         </div>
-      )}
+      
 
       {searchbotton && (
         <div className="relative top-full flex px-2 py-[6px] border rounded-lg my-3 w-[80vw] mx-auto bg-white border-slate-300 outline-none cursor-pointer sm:w-[30vw]">
