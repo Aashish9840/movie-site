@@ -10,7 +10,7 @@ export const Main = ({ movies }) => {
   useEffect(() => {
     const curMovie = movies[Math.floor(Math.random() * 10)];
     setHomeSlide(curMovie);
-  }, []);
+  }, [movies]);
   const monthMapper = {
     1: "Jan",
     2: "Feb",
@@ -31,7 +31,7 @@ export const Main = ({ movies }) => {
     return `${monthMapper[newDate.getMonth()]} ${newDate.getDay()}`;
   }
   return (
-    <div className="flex flex-col min-h-screen w-screen px-0 md:bg-black md:px-4">
+    <div className="flex flex-col min-h-screen w-full px-0 md:bg-black md:px-4">
       <div
         className="h-[90vh] bg-cover rounded-b-lg w-full"
         style={{

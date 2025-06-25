@@ -13,13 +13,9 @@ const InputfilterSearch = ({filtersearch}) => {
       setHomeSlide(movied),
       setCategorydisplay(movied),
       setfiltersearch([])
-      window.scrollTo({
-        top:0, 
-        left:0, 
-        behavior: "smooth",
-      })
+     
 }
-
+ 
 const id= uuidv4();
       
   return (

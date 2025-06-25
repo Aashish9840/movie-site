@@ -4,9 +4,9 @@ import React from 'react'
 import Country from './components/Country'
 
 const page = async () => {
- const countryfilm= await fetchMovies()
- const countryfilmscollection=countryfilm.results
- 
+  const countryfilm = await fetchMovies()
+  const countryfilmscollection = countryfilm?.results
+
   return (
     <div>
       <Country countryfilmscollection={countryfilmscollection} />

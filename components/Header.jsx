@@ -5,10 +5,7 @@ import {
   CirclePlus,
   CircleX,
   Menu,
-  Minus,
-  Plus,
   Search,
-  SquarePlus,
   X,
 } from "lucide-react";
 import Link from "next/link";
@@ -26,6 +23,25 @@ export const Header = () => {
   const { getinput, setGetinput } = useContext(DisplayContext);
   const { filtersearch, setfiltersearch } = useContext(DisplayContext);
   const { moviefetch, collectinput } = FetchSearch();
+
+  const sideclick = useRef(null);
+
+  useEffect(() => {
+    const handleSideClick = (e) => {
+      if (!sideclick.current?.contains(e.target)) {
+        setMenuState(false);
+        setrecommend(false);
+        setcountrymovie(false);
+      }
+    };
+      document.addEventListener("mousedown", handleSideClick);
+    
+
+    return () => {
+      document.removeEventListener("mousedown", handleSideClick);
+    };
+  }, [menuState, recommend, countrymovie]);
+
   useEffect(() => {
     moviefetch();
   }, [getinput]);
@@ -79,8 +95,7 @@ export const Header = () => {
   ];
   return (
     <div
-      className="flex flex-col bg-white  md:bg-black"
-      onClick={() => (setcountrymovie(false), setrecommend(false))}
+      className="flex flex-col bg-white box-border md:bg-black"
     >
       <div className="relative flex justify-between items-center  bg-white py-3 md:py-5 md:px-7 mx-4">
         <Link href="/">
@@ -92,17 +107,19 @@ export const Header = () => {
           </h1>
         </Link>
 
-        <div className="md:flex gap-[20px] lg:gap-[60px] xl:gap-[90px]">
+        <div className="flex gap-[20px] lg:gap-[60px] xl:gap-[90px]">
           <div className="hidden lg:flex items-center gap-3">
             <button
               className="text-[15px] font-semibold border rounded-full border-slate-300 px-5 py-2 hover:bg-green-400 transition duration-1000 ease-in-out hover:scale-90 xl:px-7"
-              onMouseEnter={() => (setrecommend(true), setcountrymovie(false))}
+              onMouseEnter={()=>( setrecommend(true),setcountrymovie(false))} 
+              
             >
               Genre
             </button>
             <button
               className="text-[15px] font-semibold border rounded-full border-slate-300 px-5 py-2 hover:bg-green-400 transition duration-1000 ease-in-out hover:scale-90 xl:px-7"
-              onMouseEnter={() => (setcountrymovie(true), setrecommend(false))}
+              onMouseEnter={() => (setcountrymovie(true), setrecommend(false))} 
+             
             >
               Country
             </button>
@@ -145,10 +162,11 @@ export const Header = () => {
             <Menu size={27} onClick={() => setMenuState((pre) => !pre)} />
           </div>
         </div>
+
         {recommend && (
-          <div className="absolute top-full left-[30vw] h-fit bg-yellow-50 z-10 rounded-sm grid grid-cols-4 gap-2 px-1 py-3 w-fit">
+          <div className="absolute top-full left-[30vw] h-fit bg-yellow-50 z-10 rounded-sm grid grid-cols-4 gap-2 px-1 py-3 w-fit" ref={sideclick}>
             {genre.map((item, index) => (
-              <Link key={index} href="/genre">
+              <Link key={index} href="/genre" onClick={()=>setrecommend(false)}>
                 <h1 className=" px-6 font-medium py-1 text-[14px] hover:bg-blue-500  hover:text-white">
                   {item}
                 </h1>
@@ -156,10 +174,11 @@ export const Header = () => {
             ))}
           </div>
         )}
+
         {countrymovie && (
-          <div className="absolute top-full left-[35vw] h-fit bg-yellow-50 z-10 rounded-sm grid grid-cols-4 gap-2 px-1 py-3 w-fit">
+          <div className="absolute top-full left-[35vw] h-fit bg-yellow-50 z-10 rounded-sm grid grid-cols-4 gap-2 px-1 py-3 w-fit" ref={sideclick}>
             {country.map((item, index) => (
-              <Link key={index} href="/country">
+              <Link key={index} href="/country" onClick={()=>setcountrymovie(false)}>
                 <h1 className=" px-6 font-medium py-1 text-[14px] hover:bg-blue-500  hover:text-white">
                   {item}
                 </h1>
@@ -168,11 +187,12 @@ export const Header = () => {
           </div>
         )}
       </div>
-      <hr className="mx-4" />
-      {/* to show the menu items based on menuState */}
+
+     
         <div
-          className={`absolute flex flex-col text-white bg-black top-0 right-0 gap-10 w-[90%]
-          z-10 px-5 py-5 transition-all duration-500 ease-in-linear ${menuState ? "h-screen  opacity-100":"h-0  opacity-0"}`}
+          className={`fixed flex flex-col text-white bg-black top-0 right-0 gap-10 z-10 h-screen w-[90%] 
+         px-5 py-5 transition-transform duration-1000 ease-in-out ${menuState ? "  translate-x-0  ": "  translate-x-full "}`}
+          ref={sideclick}
         >
           <div
             className="flex gap-1 justify-between items-center cursor-pointer"
@@ -202,26 +222,24 @@ export const Header = () => {
               )}
             </div>
 
-           
             <div
-              className={`relative h-fit z-10 rounded-sm grid grid-cols-2 gap-y-4 gap-x-[80px] overflow-hidden transition-all duration-1000 ease-in-out 
-              ${displaymovie ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"}`}
+              className={`relative z-10 rounded-sm grid grid-cols-2 gap-y-4 gap-x-[80px] overflow-hidden transition-all duration-1000 ease-in-out 
+              ${
+                displaymovie ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+              }`}
             >
-                {genre.map((item, index) => (
-                  <Link
-                    key={index}
-                    href="/genre"
-                    onClick={() => (
-                      setMenuState(false), setDisplaymovie(false)
-                    )}
-                  >
-                    <h1 className="font-bold py-1 text-[12px] text-slate-400 hover:bg-blue-500 px-2  hover:text-white">
-                      {item}
-                    </h1>
-                  </Link>
-                ))}
-              </div>
-            
+              {genre.map((item, index) => (
+                <Link
+                  key={index}
+                  href="/genre"
+                  onClick={() => (setMenuState(false), setDisplaymovie(false))}
+                >
+                  <h1 className="font-bold py-1 text-[12px] text-slate-400 hover:bg-blue-500 px-2  hover:text-white">
+                    {item}
+                  </h1>
+                </Link>
+              ))}
+            </div>
           </div>
 
           <div className="relative flex flex-col gap-3">
@@ -245,8 +263,12 @@ export const Header = () => {
             </div>
 
             <div
-              className={`relative h-fit z-10 rounded-sm grid grid-cols-2 gap-y-4 gap-x-[80px] overflow-hidden transition-all duration-1000 ease-in-out 
-              ${displaycountry ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"}`}
+              className={`relative z-10 rounded-sm grid grid-cols-2 gap-y-4 gap-x-[80px] overflow-hidden transition-all duration-1000 ease-in-out 
+              ${
+                displaycountry
+                  ? "opacity-100 max-h-[500px]"
+                  : "opacity-0 max-h-0"
+              }`}
             >
               {country.map((item, index) => (
                 <Link
@@ -279,8 +301,8 @@ export const Header = () => {
             Highrest Rating
           </Link>
         </div>
-     
       
+
       {searchbotton && (
         <div className="relative top-full flex px-2 py-[6px] border rounded-lg my-3 w-[80vw] mx-auto bg-white border-slate-300 outline-none cursor-pointer sm:w-[30vw]">
           <div>
