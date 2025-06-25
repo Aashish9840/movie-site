@@ -6,7 +6,6 @@ export default async function Home() {
 
   return (
     <>
-      <div>hello hello</div>
       <Main movies={data?.results} />
     </>
   );
