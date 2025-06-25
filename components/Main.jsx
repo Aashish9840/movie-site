@@ -5,7 +5,6 @@ import { Search } from "./Search";
 import { UpcomingMovies } from "./UpcomingMovies";
 import { useContext, useEffect, useState } from "react";
 export const Main = ({ movies }) => {
-  console.log(movies)
   const { HomeSlide, setHomeSlide } = useContext(DisplayContext)
 
   useEffect(() => {
