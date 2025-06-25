@@ -43,7 +43,7 @@ export const Main = ({ movies }) => {
         </div>
         <div className=" px-8 flex flex-col justify-center h-full w-full lg:w-[50%]">
           <h1 className="text-white text-2xl lg:text-5xl font-extrabold mb-3">
-            {HomeSlide?.titles}
+            {HomeSlid?.title}
           </h1>
           <p className="text-white text-sm lg:text-2xl font-semibold">
             {HomeSlide?.overview?.length > 100
