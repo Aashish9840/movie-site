@@ -5,12 +5,13 @@ import { Search } from "./Search";
 import { UpcomingMovies } from "./UpcomingMovies";
 import { useContext, useEffect, useState } from "react";
 export const Main = ({ movies }) => {
-  const {HomeSlide, setHomeSlide}=useContext(DisplayContext)
+  console.log(movies)
+  const { HomeSlide, setHomeSlide } = useContext(DisplayContext)
 
   useEffect(() => {
     const curMovie = movies[Math.floor(Math.random() * 10)];
     setHomeSlide(curMovie);
-  }, []);
+  }, [movies]);
   const monthMapper = {
     1: "Jan",
     2: "Feb",
